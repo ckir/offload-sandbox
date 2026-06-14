@@ -1,0 +1,10 @@
+{
+  "name": "offload-sandbox",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "description": "Sacrificial repo for end-to-end testing of the github-offload skill (dispatch-only CI + breakable test).",
+  "scripts": {
+    "test": "node --test"
+  }
+}

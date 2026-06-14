@@ -1,0 +1,4 @@
+node_modules/
+CI-FAILURE-REPORT.md
+.git/offload.lock
+.git/offload-state.json

@@ -1,0 +1,23 @@
+name: sandbox-ci
+# The nonce is interpolated into the run name so github-offload can resolve THIS exact
+# dispatched run race-free (it filters `gh run list` by run-name containing the nonce).
+run-name: sandbox-ci — ${{ inputs.commit }} — ${{ inputs.nonce }}
+
+# Dispatch-ONLY (NOT on: push) — pushing a fix commit fires nothing; runs happen only when
+# github-offload explicitly dispatches against a SHA. This is what prevents commit-storms.
+on:
+  workflow_dispatch:
+    inputs:
+      commit: { description: "commit SHA to check out", required: true }
+      nonce:  { description: "dispatch nonce (echoed in run-name for race-free resolution)", required: true }
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: "${{ inputs.commit }}" }
+      - uses: actions/setup-node@v4
+        with: { node-version: 20 }
+      # Exit status of `node --test` is the green/red signal github-offload watches.
+      - run: node --test
