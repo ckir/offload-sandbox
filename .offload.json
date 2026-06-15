@@ -2,6 +2,14 @@
   "workflow": "ci.yml",
   "auto_fix_attempts": 3,
   "budget_minutes": 15,
-  "local_precheck": { "format": false, "lint": false, "typecheck": false, "tests": true },
-  "precheck_cmds": { "tests": "node --test" }
+  "local_precheck": {
+    "format": false,
+    "lint": false,
+    "typecheck": false,
+    "tests": true
+  },
+  "precheck_cmds": {
+    "tests": "node --test"
+  },
+  "cleanup_runs": true
 }
